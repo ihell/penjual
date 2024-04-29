@@ -27,7 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export async function ambilDaftarPembeli() {
+export async function ambilDaftarPenjual() {
   const refDokumen = collection(db, "penjual");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
@@ -38,7 +38,7 @@ export async function ambilDaftarPembeli() {
       id: dok.id,
       nama: dok.data().nama,
       alamat: dok.data().alamat,
-      gmail: dok.data().gmail
+      gmail: dok.data().gmail,
       noTlpn: dok.data().noTlpn,
     });
   });
@@ -52,9 +52,9 @@ export function formatAngka(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export async function tambahPembeli(nama, alamat, gmail, noTlpn) {
+export async function tambahPenjual(nama, alamat, gmail, noTlpn) {
   try {
-    const dokRef = await addDoc(collection(db, 'pembeli'), {
+    const dokRef = await addDoc(collection(db, 'penjual'), {
       nama: nama,
       alamat: alamat,
       gmail: gmail,
@@ -80,7 +80,7 @@ export async function ubahPenjual(docId, nama, alamat, gmail, noTlpn) {
 }
 
 export async function ambilPenjual(docId) {
-  const docRef = await doc(db, "pembeli", docId);
+  const docRef = await doc(db, "penjual", docId);
   const docSnap = await getDoc(docRef);
 
   return await docSnap.data();
