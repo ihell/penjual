@@ -25,34 +25,40 @@
       <input type="text" class="form-control" id="input-alamat">
     </div>
     <div class="mb-3">
+      <label class="form-label">Gmail</label>
+      <input type="text" class="form-control" id="input-gmail">
+    </div>
+    <div class="mb-3">
       <label class="form-label">no telpon</label>
       <input type="text" class="form-control" id="input-noTlpn">
     </div>
     <button type="submit" class="btn btn-primary" id="tombol-ubah">Ubah</button>
   </form>
 
-  <a class="mt-1" href="siswa.html">Lihat Daftar Siswa</a>
+  <a class="mt-1" href="index.html">Lihat Daftar Siswa</a>
 
   <script type="module">
-    import { ambilPembeli, ubahPembeli } from './main.js';
+    import { ambilPenjual, ubahPenjual } from './main.js';
 
     let tombolUbah = document.getElementById('tombol-ubah');
     let elemenNamaPembeli = document.getElementById('input-nama');
     let elemenAlamat = document.getElementById('input-alamat');
+    let elemenGmail = document.getElementById('input-gmail')
     let elemenNoTlpn = document.getElementById('input-noTlpn');
     const queryString = window.location.search
     const parameterURL = new URLSearchParams(queryString);
     const docId = parameterURL.get('docId')
-    const pembeli = await ambilPembeli(docId);
+    const penjual = await ambilPenjual(docId);
 
-    elemenNamaPembeli.value = pembeli.nama;
-    elemenAlamat.value = pembeli.alamat;
-    elemenNoTlpn.value = pembeli.noTlpn;
+    elemenNamaPembeli.value = penjual.nama;
+    elemenAlamat.value = penjual.alamat;
+    elemenGmail.value = penjual.gmail;
+    elemenNoTlpn.value = penjual.noTlpn;
 
 
     tombolUbah.addEventListener('click', async function(el) {
       el.preventDefault();
-      await ubahPembeli(docId, elemenNamaPembeli.value, elemenAlamat.value, elemenNoTlpn.value);
+      await ubahPenjual(docId, elemenNamaPembeli.value, elemenAlamat.value, elemenGmail.value, elemenNoTlpn.value);
       window.location.href = 'index.html';
     });
   </script>
