@@ -67,7 +67,7 @@ export async function tambahPenjual(nama, alamat, gmail, noTlpn) {
 }
 
 export async function hapusPenjual(docId) {
-  await deleteDoc(doc(db, "penjul", docId));
+  await deleteDoc(doc(db, "penjual", docId));
 }
 
 export async function ubahPenjual(docId, nama, alamat, gmail, noTlpn) {
