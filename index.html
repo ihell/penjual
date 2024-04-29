@@ -36,7 +36,7 @@
 
   <img src="loader.gif" style="width: 15em; display: block" id="loader">
 
-  <a href="forum-data-pembeli.html">tambah data pembeli</a>
+  <a href="forum-data-penjual.html">tambah data pembeli</a>
 
   <style>
     table {
@@ -96,7 +96,7 @@
       });
 
       $('.tombol-hapus').click(async function() {
-        await hapusPembeli($(this).attr('data'));
+        await hapusPenjual($(this).attr('data'));
         location.reload();
       })
 
