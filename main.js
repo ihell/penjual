@@ -28,7 +28,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export async function ambilDaftarPembeli() {
-  const refDokumen = collection(db, "pembeli");
+  const refDokumen = collection(db, "penjual");
   const kueri = query(refDokumen, orderBy("nama"));
   const cuplikanKueri = await getDocs(kueri);
 
@@ -38,6 +38,7 @@ export async function ambilDaftarPembeli() {
       id: dok.id,
       nama: dok.data().nama,
       alamat: dok.data().alamat,
+      gmail: dok.data().gmail
       noTlpn: dok.data().noTlpn,
     });
   });
@@ -51,11 +52,12 @@ export function formatAngka(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-export async function tambahPembeli(nama, alamat, noTlpn) {
+export async function tambahPembeli(nama, alamat, gmail, noTlpn) {
   try {
     const dokRef = await addDoc(collection(db, 'pembeli'), {
       nama: nama,
       alamat: alamat,
+      gmail: gmail,
       noTlpn: noTlpn
     });
     console.log('berhasil menembah produk ' + dokRef.id);
@@ -64,19 +66,20 @@ export async function tambahPembeli(nama, alamat, noTlpn) {
   }
 }
 
-export async function hapusPembeli(docId) {
-  await deleteDoc(doc(db, "pembeli", docId));
+export async function hapusPenjual(docId) {
+  await deleteDoc(doc(db, "penjul", docId));
 }
 
-export async function ubahPembeli(docId, nama, alamat, noTlpn) {
-  await updateDoc(doc(db, "pembeli", docId), {
+export async function ubahPenjual(docId, nama, alamat, gmail, noTlpn) {
+  await updateDoc(doc(db, "penjual", docId), {
     nama: nama,
     alamat: alamat,
+    gmail: gmail,
     noTlpn: noTlpn
   });
 }
 
-export async function ambilPembeli(docId) {
+export async function ambilPenjual(docId) {
   const docRef = await doc(db, "pembeli", docId);
   const docSnap = await getDoc(docRef);
 
