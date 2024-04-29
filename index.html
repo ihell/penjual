@@ -19,7 +19,7 @@
 
 
 
-  <table class="table" id="daftar-pembeli">
+  <table class="table" id="daftar-penjual">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -71,7 +71,7 @@
     import { ambilDaftarPenjual, formatAngka, hapusPenjual } from './main.js';
 
     $(document).ready(async function() {
-      let elemenDaftar = $("#daftar-pembeli > tbody");
+      let elemenDaftar = $("#daftar-penjual > tbody");
       let daftarPenjual = await ambilDaftarPenjual();
       let nomor = 1;
 
@@ -101,7 +101,7 @@
       })
 
       $('.link-ubah').click(async function() {
-        window.location.replace('ubah-produk.html?docId=' + $(this).attr('data'));
+        window.location.replace('ubah-penjual.html?docId=' + $(this).attr('data'));
       })
 
       $('#loader').hide();
